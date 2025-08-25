@@ -2,19 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Building2, Calculator, Users, TrendingUp, LogOut } from "lucide-react";
-import { SmartPricing } from "@/components/SmartPricing";
-import { PropertyRecommender } from "@/components/PropertyRecommender";
-import { LeadScoring } from "@/components/LeadScoring";
 import { useToast } from "@/hooks/use-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState("pricing");
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -121,35 +116,68 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Main Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 lg:w-[400px] h-12">
-            <TabsTrigger value="pricing" className="flex items-center space-x-2">
-              <Calculator className="h-4 w-4" />
-              <span>Smart Pricing</span>
-            </TabsTrigger>
-            <TabsTrigger value="recommender" className="flex items-center space-x-2">
-              <Building2 className="h-4 w-4" />
-              <span>Recommender</span>
-            </TabsTrigger>
-            <TabsTrigger value="leads" className="flex items-center space-x-2">
-              <Users className="h-4 w-4" />
-              <span>Lead Scoring</span>
-            </TabsTrigger>
-          </TabsList>
+        {/* Feature Navigation */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card 
+            className="shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            onClick={() => navigate("/smart-pricing")}
+          >
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Calculator className="h-6 w-6 text-primary" />
+                </div>
+                <Button variant="ghost" size="sm">
+                  Open →
+                </Button>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Smart Pricing & ROI</h3>
+              <p className="text-muted-foreground">
+                AI-powered property valuation with ROI predictions and rental yield analysis
+              </p>
+            </CardContent>
+          </Card>
 
-          <TabsContent value="pricing">
-            <SmartPricing />
-          </TabsContent>
+          <Card 
+            className="shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            onClick={() => navigate("/property-recommender")}
+          >
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-full bg-success/10 group-hover:bg-success/20 transition-colors">
+                  <Building2 className="h-6 w-6 text-success" />
+                </div>
+                <Button variant="ghost" size="sm">
+                  Open →
+                </Button>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Property Recommender</h3>
+              <p className="text-muted-foreground">
+                Match clients with perfect properties based on their preferences and requirements
+              </p>
+            </CardContent>
+          </Card>
 
-          <TabsContent value="recommender">
-            <PropertyRecommender />
-          </TabsContent>
-
-          <TabsContent value="leads">
-            <LeadScoring />
-          </TabsContent>
-        </Tabs>
+          <Card 
+            className="shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+            onClick={() => navigate("/lead-scoring")}
+          >
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-full bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                  <Users className="h-6 w-6 text-accent" />
+                </div>
+                <Button variant="ghost" size="sm">
+                  Open →
+                </Button>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Lead Scoring</h3>
+              <p className="text-muted-foreground">
+                Classify and prioritize leads with AI-powered scoring and probability analysis
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </main>
     </div>
   );

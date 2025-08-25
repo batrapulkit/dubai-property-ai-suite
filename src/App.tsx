@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import SmartPricing from "./pages/SmartPricing";
+import PropertyRecommender from "./pages/PropertyRecommender";
+import LeadScoring from "./pages/LeadScoring";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +22,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/smart-pricing" element={<SmartPricing />} />
+          <Route path="/property-recommender" element={<PropertyRecommender />} />
+          <Route path="/lead-scoring" element={<LeadScoring />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
